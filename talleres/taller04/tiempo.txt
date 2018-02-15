@@ -1,0 +1,33 @@
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.Arrays;
+public class punto2
+{
+    public static void main(String [] args){
+        int[] a= randomN(500000,-10,10);
+        long startTime=System.currentTimeMillis();
+        //groupSum(0,a,40);
+        arrayMax(a,60);
+        //fib(43);
+        System.out.println(System.currentTimeMillis()-startTime);
+    }
+    public static int[] randomN(int n, int min, int max){
+        int[] a = new int[n];
+        for(int i=0;i<n;++i)
+            a[i] = ThreadLocalRandom.current().nextInt(min, max+1);
+        return a;
+    }
+    public static int fib(int n){
+        if(n<=1)return n;return fib(n-1)+fib(n-2);  
+    }
+    public static boolean groupSum (int start, int [] nums, int target ){
+        if (start >= nums.length){
+            return target == 0;
+        }else{
+            return groupSum(start + 1, nums, target)
+            || groupSum(start+1,nums,target-nums[start]);
+        }
+    }
+    public static int arrayMax(int [] a, int n){
+        if (n==0)return a[0];return Math.max(a[n],arrayMax(a,n-1));
+    }
+}
